@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../partials/header"); -%>
+  <body>
+    <div id="grid">
+      <%- include("../partials/content_header"); -%>
+      <section id="content">
+        <section id="repos">
+          <%- include("../partials/channelbox", {
+            showDesktop: true,
+            showAndroid: true,
+            counts: counts["upstream"],
+            name: "upstream"
+          }) %>
+          <%- include("../partials/channelbox", {
+            showDesktop: true,
+            showAndroid: false,
+            counts: counts["mozilla-central"],
+            name: "mozilla-central"
+          }) %>
+          <%- include("../partials/channelbox", {
+            showDesktop: false,
+            showAndroid: true,
+            counts: counts["android-components"],
+            name: "android-components"
+          }) %>
+        </section>
+        <section id="releases">
+          <%- include("../partials/channelbox", {
+            showDesktop: true,
+            showAndroid: true,
+            counts: counts["mozilla-beta"],
+            name: "mozilla-beta"
+          }) %>
+          <%- include("../partials/channelbox", {
+            showDesktop: true,
+            showAndroid: true,
+            counts: counts["mozilla-release"],
+            name: "mozilla-release"
+          }) %>
+        </section>
+      </section>
+      <%- include("../partials/content_footer"); -%>
+    </div>
+  </body>
+</html>

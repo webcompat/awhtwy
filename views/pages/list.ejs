@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../partials/header"); -%>
+  <body>
+    <div id="grid">
+      <%- include("../partials/content_header"); -%>
+      <section id="content" class="list">
+        <h2>Active interventions, <%= distribution %></h2>
+        <p>
+          Note that due to the way we share code between distributions, the
+          following list will include interventions that will never run in the
+          selected product.
+        </p>
+        <table>
+          <tr>
+            <th>Bugzilla Bug</th>
+            <th>Affected domain(s)</th>
+            <th>Type</th>
+            <th>Target platform</th>
+          </tr>
+          <% interventions.forEach((intervention) => { %>
+            <tr>
+              <td><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=<%= intervention.bug %>" rel="noopener" target="_blank"><%= intervention.bug %></a></td>
+              <td><%= intervention.domain %></td>
+              <td><%= intervention.type %></td>
+              <td><%= intervention.platform %></td>
+            </tr>
+          <% }); %>
+        </table>
+      </section>
+      <%- include("../partials/content_footer"); -%>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "distributions": [
+    "android-components",
+    "mozilla-beta",
+    "mozilla-central",
+    "mozilla-release",
+    "upstream"
+  ],
+  "types": ["injection", "ua_override"],
+  "platforms": ["all", "android", "desktop"],
+  "sources": {
+    "android-components": {
+      "injection": "https://raw.githubusercontent.com/mozilla-mobile/android-components/master/components/feature/webcompat/src/main/assets/extensions/webcompat/data/injections.js",
+      "ua_override": "https://raw.githubusercontent.com/mozilla-mobile/android-components/master/components/feature/webcompat/src/main/assets/extensions/webcompat/data/ua_overrides.js"
+    },
+    "mozilla-beta": {
+      "injection": "https://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/browser/extensions/webcompat/data/injections.js",
+      "ua_override": "https://hg.mozilla.org/releases/mozilla-beta/raw-file/tip/browser/extensions/webcompat/data/ua_overrides.js"
+    },
+    "mozilla-central": {
+      "injection": "https://hg.mozilla.org/mozilla-central/raw-file/tip/browser/extensions/webcompat/data/injections.js",
+      "ua_override": "https://hg.mozilla.org/mozilla-central/raw-file/tip/browser/extensions/webcompat/data/ua_overrides.js"
+    },
+    "mozilla-release": {
+      "injection": "https://hg.mozilla.org/releases/mozilla-release/raw-file/tip/browser/extensions/webcompat/data/injections.js",
+      "ua_override": "https://hg.mozilla.org/releases/mozilla-release/raw-file/tip/browser/extensions/webcompat/data/ua_overrides.js"
+    },
+    "upstream": {
+      "injection": "https://raw.githubusercontent.com/mozilla/webcompat-addon/master/src/data/injections.js",
+      "ua_override": "https://raw.githubusercontent.com/mozilla/webcompat-addon/master/src/data/ua_overrides.js"
+    }
+  }
+}

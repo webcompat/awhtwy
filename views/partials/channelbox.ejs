@@ -1,0 +1,45 @@
+<section class="channel">
+  <h2><%= name %></h2>
+
+  <h3>User Agent overrides</h3>
+  <section class="platforms">
+    <% if(showDesktop) { %>
+      <div class="platform">
+        <i class="material-icons">desktop_mac</i>
+        <p>
+          <%= counts["ua_override"]["all"] + counts["ua_override"]["desktop"] %>
+        </p>
+      </div>
+    <% } %>
+    <% if(showAndroid) { %>
+      <div class="platform">
+        <i class="material-icons">android</i>
+        <p>
+          <%= counts["ua_override"]["all"] + counts["ua_override"]["android"] %>
+        </p>
+      </div>
+    <% } %>
+  </section>
+
+  <h3>CSS/JS injections</h3>
+  <section class="platforms">
+    <% if(showDesktop) { %>
+      <div class="platform">
+        <i class="material-icons">desktop_mac</i>
+        <p>
+          <%= counts["injection"]["all"] + counts["injection"]["desktop"] %>
+        </p>
+      </div>
+    <% } %>
+    <% if(showAndroid) { %>
+      <div class="platform">
+        <i class="material-icons">android</i>
+        <p>
+          <%= counts["injection"]["all"] + counts["injection"]["android"] %>
+        </p>
+      </div>
+    <% } %>
+  </section>
+
+  <h3><a href="/list/<%= name %>">List active interventions</a></h3>
+</section>
