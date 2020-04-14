@@ -62,6 +62,12 @@ async function runImportAndCount(config, database) {
       let latestCount = await database.getLatestCounts();
       res.render("pages/dashboard", { counts: latestCount["counters"] });
     })
+    .get("/refresh", async (req, res) => {
+      await runImportAndCount(config, database);
+
+      res.writeHead(302, { Location: "/" });
+      res.end();
+    })
     .get("/list/:distribution", async (req, res) => {
       let distribution = req.params.distribution;
       if (!config["distributions"].includes(distribution)) {
