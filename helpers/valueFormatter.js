@@ -13,7 +13,7 @@ const PLATFORM_LABELS = {
   android: "Android (and Fenix)",
 };
 
-module.exports = intervention => {
+module.exports = (intervention) => {
   intervention.type = TYPE_LABELS[intervention.type];
   intervention.platform = PLATFORM_LABELS[intervention.platform];
 

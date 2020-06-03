@@ -10,6 +10,8 @@ const Sentry = require("@sentry/node");
 
 const Database = require("./lib/database");
 const DataImporter = require("./lib/dataImporter");
+const DateHelpers = require("./helpers/dateHelpers");
+const HistoryFormatter = require("./helpers/historyFormatter");
 const InterventionCounter = require("./lib/interventionCounter");
 const ValueFormatter = require("./helpers/valueFormatter");
 
@@ -84,6 +86,45 @@ async function runImportAndCount(config, database) {
         distribution: distribution,
         interventions: interventions,
       });
+    })
+    .get("/data.json", async (req, res) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Vary", "Origin");
+      res.setHeader("Content-Type", "application/json");
+
+      let startDate = req.query.start;
+      let endDate = req.query.end;
+      let distribution = req.query.distribution;
+      let type = req.query.type;
+
+      if (!startDate || !startDate.match(DateHelpers.VALID_DATE)) {
+        let today = new Date();
+        startDate = DateHelpers.format(new Date(today.getFullYear(), 0, 1));
+      }
+
+      if (!endDate || !endDate.match(DateHelpers.VALID_DATE)) {
+        endDate = DateHelpers.format(new Date());
+      }
+
+      if (!distribution || !config["distributions"].includes(distribution)) {
+        return res
+          .status(400)
+          .end('{"error": "distribution parameter unset or invalid!"}');
+      }
+
+      if (!type || !(config["types"].includes(type) || type == "all")) {
+        return res
+          .status(400)
+          .end('{"error": "type parameter unset or invalid!"}');
+      }
+
+      let data = await database.getHistoricalData(
+        startDate,
+        endDate,
+        distribution
+      );
+      res.end(JSON.stringify(data.map((row) => HistoryFormatter(row, type))));
     })
     .use((req, res) => res.status(404).render("pages/404"))
     .use(Sentry.Handlers.errorHandler())
