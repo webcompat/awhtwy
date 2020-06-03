@@ -5,6 +5,9 @@
   "license": "MPL-2.0",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/webcompat/awhtwy.git"
