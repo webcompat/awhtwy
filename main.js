@@ -100,11 +100,26 @@ async function runImportAndCount(config, database) {
 
       if (!startDate || !startDate.match(DateHelpers.VALID_DATE)) {
         let today = new Date();
-        startDate = DateHelpers.format(new Date(today.getFullYear(), 0, 1));
+        startDate = new Date(today.getFullYear(), 0, 1);
+      } else {
+        startDate = DateHelpers.parseDateString(startDate);
       }
 
       if (!endDate || !endDate.match(DateHelpers.VALID_DATE)) {
-        endDate = DateHelpers.format(new Date());
+        let today = new Date();
+        endDate = new Date(
+          Date.UTC(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            23,
+            59,
+            59,
+            999
+          )
+        );
+      } else {
+        endDate = DateHelpers.parseDateString(endDate, true);
       }
 
       if (!distribution || !config["distributions"].includes(distribution)) {

@@ -5,11 +5,21 @@
 module.exports = {
   VALID_DATE: /[0-9]{4}-[0-9]{2}-[0-9]{2}/,
 
-  format: function (date) {
-    return [
-      date.getFullYear(),
-      (date.getMonth() + 1).toString().padStart(2, "0"),
-      date.getDate().toString().padStart(2, "0"),
-    ].join("-");
+  parseDateString: function (dateStr, asEndOfDay = false) {
+    if (dateStr.match(this.VALID_DATE)) {
+      try {
+        let [year, month, day] = dateStr.split("-");
+        if (asEndOfDay) {
+          return new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999));
+        } else {
+          return new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
+        }
+      } catch (error) {
+        console.error("Failed to parse date: ", error);
+        return false;
+      }
+    }
+
+    return false;
   },
 };
