@@ -18,23 +18,23 @@
             counts: counts["mozilla-central"],
             name: "mozilla-central"
           }) %>
+        </section>
+        <section id="releases">
           <%- include("../partials/channelbox", {
             showDesktop: false,
             showAndroid: true,
             counts: counts["android-components"],
             name: "android-components"
           }) %>
-        </section>
-        <section id="releases">
           <%- include("../partials/channelbox", {
             showDesktop: true,
-            showAndroid: true,
+            showAndroid: false,
             counts: counts["mozilla-beta"],
             name: "mozilla-beta"
           }) %>
           <%- include("../partials/channelbox", {
             showDesktop: true,
-            showAndroid: true,
+            showAndroid: false,
             counts: counts["mozilla-release"],
             name: "mozilla-release"
           }) %>
