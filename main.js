@@ -6,7 +6,6 @@ const DotEnv = require("dotenv");
 const Express = require("express");
 const Path = require("path");
 const Schedule = require("node-schedule");
-const Sentry = require("@sentry/node");
 
 const Database = require("./lib/database");
 const DataImporter = require("./lib/dataImporter");
@@ -17,10 +16,6 @@ const ValueFormatter = require("./helpers/valueFormatter");
 
 const config = require("./config/interventions.json");
 DotEnv.config();
-
-if (process.env.SENTRY_DSN) {
-  Sentry.init({ dsn: process.env.SENTRY_DSN });
-}
 
 async function runImportAndCount(config, database) {
   let data = await new DataImporter(config).run();
@@ -56,7 +51,6 @@ async function runImportAndCount(config, database) {
   // to only have a single node process running at all times.
   let port = process.env.PORT || 5000;
   Express()
-    .use(Sentry.Handlers.requestHandler())
     .use(Express.static(Path.join(__dirname, "public")))
     .set("views", Path.join(__dirname, "views"))
     .set("view engine", "ejs")
@@ -142,6 +136,5 @@ async function runImportAndCount(config, database) {
       res.end(JSON.stringify(data.map((row) => HistoryFormatter(row, type))));
     })
     .use((req, res) => res.status(404).render("pages/404"))
-    .use(Sentry.Handlers.errorHandler())
     .listen(port, () => console.log(`Listening on port ${port}`));
 })();
