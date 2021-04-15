@@ -26,8 +26,8 @@
       "ua_override": "https://hg.mozilla.org/releases/mozilla-release/raw-file/tip/browser/extensions/webcompat/data/ua_overrides.js"
     },
     "upstream": {
-      "injection": "https://raw.githubusercontent.com/mozilla-extensions/webcompat-addon/master/src/data/injections.js",
-      "ua_override": "https://raw.githubusercontent.com/mozilla-extensions/webcompat-addon/master/src/data/ua_overrides.js"
+      "injection": "https://raw.githubusercontent.com/mozilla-extensions/webcompat-addon/main/src/data/injections.js",
+      "ua_override": "https://raw.githubusercontent.com/mozilla-extensions/webcompat-addon/main/src/data/ua_overrides.js"
     }
   }
 }
