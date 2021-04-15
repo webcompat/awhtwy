@@ -10,7 +10,7 @@ const TYPE_LABELS = {
 const PLATFORM_LABELS = {
   all: "All platforms",
   desktop: "Desktop",
-  android: "Android (and Fenix)",
+  android: "Android",
 };
 
 module.exports = (intervention) => {
